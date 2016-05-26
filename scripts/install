@@ -111,7 +111,6 @@ sed -i "s@__NET2FTP__@$netftp_path@g" ../sources/index_ftp.html
 sed -i "s@__PORT__@$(cat /etc/pure-ftpd/conf/Bind)@g" ../sources/index_ftp.html
 
 # Copy files to the right place
-#sudo mkdir $final_path # Dossier déjà créer auparavant génère une erreur
 sudo cp ../sources/index.html $final_path/
 # Vérifie si pure-ftpd est déjà installé
 if test -f /usr/sbin/pure-ftpd-ldap

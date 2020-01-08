@@ -35,8 +35,15 @@ app=$YNH_APP_INSTANCE_NAME
 ynh_script_progression --message="Check if the app can be installed"
 
 parent_dir=/var/www/webapp_$admin
-directory="${domain//-/_}_$(echo $path_url | cut -d '/' -f 2)"
-appname=webapp_$directory
+
+# use as base for the directory and appname the domain and path and normalize it
+# so it can be used as a unix username (no . nor - and max 32 chars)
+cutted_domain="$(echo ${domain//-/_} | cut -c 1-15)"
+cutted_domain=${cutted_domain//./_}
+cutted_path="$(echo $path_url | cut -d '/' -f 2 | cut -c 1-8)"
+directory="${cutted_domain}_${cutted_path}"
+appname=webapp_$directory # maxlength = 7 + 16 + 9 = 32
+
 final_path=$parent_dir/$directory
 # For this app; $app is the label, as usual, but $appname will contains the real name of the app, from the path.
 test ! -e "$final_path" || ynh_die "This path already contains a folder"
@@ -183,7 +190,7 @@ ynh_replace_string "__APPNAME__" "$appname" "$finalnginxconf"
 
 # Set permissions to app files
 chmod 775 -R $final_path
-chown -R $admin:$appname $final_path
+chown -R $appname:$appname $final_path
 
 #=================================================
 # RELOAD NGINX

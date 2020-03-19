@@ -38,10 +38,8 @@ parent_dir=/var/www/webapp_$admin
 
 # use as base for the directory and appname the domain and path and normalize it
 # so it can be used as a unix username (no . nor - and max 32 chars)
-cutted_domain="$(echo ${domain//-/_} | cut -c 1-15)"
-cutted_domain=${cutted_domain//./_}
-cutted_path="$(echo $path_url | cut -d '/' -f 2 | cut -c 1-8)"
-directory="${cutted_domain}_${cutted_path}"
+directory="$(echo ${domain//[-.]/_} | cut -c 1-15)_\
+$(echo $path_url | cut -d '/' -f 2 | cut -c 1-8)"
 appname=webapp_$directory # maxlength = 7 + 16 + 9 = 32
 
 final_path=$parent_dir/$directory

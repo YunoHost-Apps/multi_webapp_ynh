@@ -82,19 +82,11 @@ then
 fi
 
 #=================================================
-# RECREATE THE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Recreate the dedicated user" --weight=2
-
-# Create the dedicated user (if not existing)
-ynh_system_user_create $appname
-
-#=================================================
 # RESTORE USER RIGHTS
 #=================================================
 
 # Restore permissions on app files
-chown -R $admin:$appname $final_path
+chown -R $admin $final_path
 
 #=================================================
 # RESTORE THE PHP-FPM CONFIGURATION

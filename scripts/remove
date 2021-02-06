@@ -82,12 +82,6 @@ fi
 #=================================================
 # GENERIC FINALISATION
 #=================================================
-# REMOVE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Remove the dedicated user" --weight=2
-
-# Delete dedicated system user
-ynh_system_user_delete $appname
 
 #=================================================
 # END OF SCRIPT

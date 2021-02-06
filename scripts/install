@@ -142,7 +142,7 @@ cp ../conf/php-fpm.conf "$finalphpconf"
 
 ynh_replace_string "__NAMETOCHANGE__" "$appname" "$finalphpconf"
 ynh_replace_string "__FINALPATH__" "$final_path" "$finalphpconf"
-ynh_replace_string "__USER__" "$appname" "$finalphpconf"
+ynh_replace_string "__USER__" "$admin" "$finalphpconf"
 
 chown root: "$finalphpconf"
 

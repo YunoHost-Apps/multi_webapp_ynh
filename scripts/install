@@ -73,7 +73,7 @@ ynh_script_progression --message="Setup SSOwat"
 # Make app public if necessary
 if [ $is_public -eq 1 ]
 then
-	ynh_app_setting_set $app skipped_uris "/"
+	ynh_permission_update --permission "main" --add "visitors"
 fi
 
 #=================================================
